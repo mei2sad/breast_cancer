@@ -5,6 +5,7 @@ import pandas as pd
 
 breast_cancer_data = load_breast_cancer()
 k=1
+#k값 0이면 실행이 안됨
 
 df_data = pd.DataFrame(breast_cancer_data.data)
 df_labels = pd.DataFrame(breast_cancer_data.target)
@@ -46,7 +47,6 @@ plt.show()
 #k값을 1~101까지 반복 후 그래프를 보면 1~20이후는 급격히 떨어짐, 따라서 1~20 사이 값을 자세히 추출
 
 k_list = range(1,20)
-#그래프 부분
 accuracies = []
 
 for k in k_list:
@@ -59,7 +59,9 @@ plt.xlabel("k")
 plt.ylabel("Validation Accuracy")
 plt.title("Breast Cancer Classifier Accuracy")
 plt.show()
+
 #정확도 출력 부분
+
 for i in range(1,20):
     classifier = KNeighborsClassifier(n_neighbors = i)
     classifier.fit(training_data, training_labels.values.ravel())
@@ -68,4 +70,4 @@ for i in range(1,20):
     print('KNN Accuracy: {:.2f}%'.format(classifier.score(validation_data, validation_labels) * 100))
     
     
-    #########################첫번째 수정된 파일################################
+    #########################주석 수정된 파일################################
