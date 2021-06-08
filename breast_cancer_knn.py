@@ -66,3 +66,6 @@ for i in range(1,20):
     #print(classifier.score(validation_data, validation_labels))
     print("K=%d"%i)
     print('KNN Accuracy: {:.2f}%'.format(classifier.score(validation_data, validation_labels) * 100))
+    
+    
+    #########################첫번째 수정된 파일################################
