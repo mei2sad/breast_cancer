@@ -2,7 +2,6 @@ from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
-import matplotlib.pyplot as plt
 
 breast_cancer_data = load_breast_cancer()
 k=1
@@ -28,10 +27,20 @@ for x in range(len(df_data.columns)):
 
 training_data, validation_data , training_labels, validation_labels = train_test_split(df_data, df_labels, test_size = 0.2, random_state = 42)
 
+import matplotlib.pyplot as plt
 
-from sklearn.neighbors import KNeighborsClassifier
-classifier = KNeighborsClassifier(n_neighbors = 3)
+k_list = range(1,101)
+accuracies = []
 
-classifier.fit(training_data, training_labels)
+for k in k_list:
+  classifier = KNeighborsClassifier(n_neighbors = k)
+  classifier.fit(training_data, training_labels)
+  accuracies.append(classifier.score(validation_data, validation_labels))
 
-print(classifier.score(validation_data, validation_labels))
+plt.plot(k_list, accuracies)
+plt.xlabel("k")
+plt.ylabel("Validation Accuracy")
+plt.title("Breast Cancer Classifier Accuracy")
+plt.show()
+
+#k값을 1~101까지 반복 후 그래프를 보면 1~20이후는 급격히 떨어짐, 따라서 1~20 사이 값을 자세히 추출
