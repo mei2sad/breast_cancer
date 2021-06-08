@@ -18,31 +18,17 @@ from sklearn.metrics import accuracy_score, confusion_matrix, roc_curve, roc_auc
 from sklearn.preprocessing import Normalizer, MinMaxScaler, StandardScaler, RobustScaler, QuantileTransformer, LabelEncoder
 from sklearn.pipeline import Pipeline
 
-
-
 cancer = load_breast_cancer()
 
 X_train, X_test, y_train, y_test = train_test_split(cancer.data,cancer.target, random_state=42, test_size=0.2)
 
-
-
-# 훈련 세트 각 특성의 평균
-
 mean_on_train = X_train.mean(axis=0)
 
-# 훈련 세트 각 특성의 표준 편차
-
 std_on_train = X_train.std(axis=0)
-
-
-
-# 표준 정규분포
 
 X_train_scaled = (X_train-mean_on_train)/std_on_train
 
 X_test_scaled = (X_test-mean_on_train)/std_on_train
-
-
 
 random_state = 42
 mlp_activation = ['identity', 'logistic', 'tanh', 'relu']
@@ -115,3 +101,6 @@ print('MLP AUC: {:.2f}%'.format(roc_auc_score(y_test, mlp_predict_proba) * 100))
 print('MLP Classification report:\n\n', classification_report(y_test, mlp_predict))
 print('MLP Training set score: {:.2f}%'.format(mlp.score(X_train_scaler, y_train) * 100))
 print('MLP Testing set score: {:.2f}%'.format(mlp.score(X_test_scaler, y_test) * 100))
+
+#######주석 수정 버전###################
+
